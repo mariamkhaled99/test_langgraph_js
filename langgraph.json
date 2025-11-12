@@ -1,0 +1,15 @@
+{
+  "node_version": "20",
+   "dockerfile_lines": [
+    "RUN npm install tsx hono"
+  ],
+  "graphs": {
+    "agent": "./src/agent/graph.ts:graph"
+  },
+   "http": {
+    "app": "./src/agent/app.ts:app"
+  },
+    "env": ".env",
+  "dependencies": [".","@langchain/langgraph","@langchain/core","@langchain/langgraph-cli","hono"],
+  "image_distro": "wolfi"
+}

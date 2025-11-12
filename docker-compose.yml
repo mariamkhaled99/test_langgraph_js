@@ -1,0 +1,30 @@
+services:
+  langgraph:
+    image: test_langgraph_js:latest
+    ports:
+      - "8182:8000"
+      - "2024:2024"
+    environment:
+      REDIS_URI: "redis://redis:6379/0"
+      DATABASE_URI: "postgresql://postgres:password@postgres:5432/langgraph"
+      LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
+    env_file:
+       - .env
+    depends_on:
+      - redis
+      - postgres
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: langgraph
+    ports:
+      - "5432:5432"
+
